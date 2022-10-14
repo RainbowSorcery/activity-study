@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1p0tzhe" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.4.1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.1.0">
+  <bpmn:process id="holiday" name="请假" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_04asdk9</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_04asdk9" sourceRef="StartEvent_1" targetRef="Activity_07kq869" />
+    <bpmn:userTask id="Activity_07kq869" name="填写请假单">
+      <bpmn:extensionElements>
+        <zeebe:assignmentDefinition assignee="${sponsor}" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_04asdk9</bpmn:incoming>
+      <bpmn:outgoing>Flow_0yuytx2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0yuytx2" sourceRef="Activity_07kq869" targetRef="Activity_0k3rh51" />
+    <bpmn:userTask id="Activity_0k3rh51" name="经理审批">
+      <bpmn:extensionElements>
+        <zeebe:assignmentDefinition candidateGroups="${manager}" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0yuytx2</bpmn:incoming>
+      <bpmn:outgoing>Flow_0mts10l</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_0lli8p8">
+      <bpmn:incoming>Flow_0mts10l</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0mts10l" sourceRef="Activity_0k3rh51" targetRef="Event_0lli8p8" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="holiday">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_00ni8lx_di" bpmnElement="Activity_07kq869">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_07noeln_di" bpmnElement="Activity_0k3rh51">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0lli8p8_di" bpmnElement="Event_0lli8p8">
+        <dc:Bounds x="592" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_04asdk9_di" bpmnElement="Flow_04asdk9">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0yuytx2_di" bpmnElement="Flow_0yuytx2">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0mts10l_di" bpmnElement="Flow_0mts10l">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="592" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
